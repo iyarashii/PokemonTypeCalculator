@@ -19,6 +19,7 @@ namespace PokemonTypeCalc
             TypeName = name;
             DmgTaken = multiplier;
         }
+        // property which stores type name
         public string TypeName { get; set; }
         public double DmgTaken { get; set; }
         public Android.Graphics.Color TypeColor
