@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Pokemon Type Calculator</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="pokemonType">
+      <item>(none)</item>
+      <item>NORMAL</item>
+      <item>FIGHTING</item>
+      <item>FLYING</item>
+      <item>POISON</item>
+      <item>GROUND</item>
+      <item>ROCK</item>
+      <item>BUG</item>
+      <item>GHOST</item>
+      <item>STEEL</item>
+      <item>FIRE</item>
+      <item>WATER</item>
+      <item>GRASS</item>
+      <item>ELECTRIC</item>
+      <item>PSYCHIC</item>
+      <item>ICE</item>
+      <item>DRAGON</item>
+      <item>DARK</item>
+      <item>FAIRY</item>
+    </string-array>
+    <string name="notype">(none)</string>
+</resources>
