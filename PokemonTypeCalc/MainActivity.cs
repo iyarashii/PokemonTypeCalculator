@@ -13,27 +13,28 @@ namespace PokemonTypeCalc
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        // Array of textviews that are inside tablelayout
+        // Array of TextViews that are inside TableLayout
         protected TextView[] textViewArray;        
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);        
+            SetContentView(Resource.Layout.activity_main);
 
+            // changing CultureInfo to en-GB to show decimal point as "." instead of ","
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
 
-            SetContentView(Resource.Layout.activity_main);
-        
+            // creating an array of 36 TextViews used for storing every cell from TableLayout
             int textViewCount = 36;
             textViewArray = new TextView[textViewCount];
 
+            // assigning resources to local variables
             Spinner spinner = FindViewById<Spinner>(Resource.Id.spinnerPrimaryType);
             Spinner spinner2 = FindViewById<Spinner>(Resource.Id.spinnerSecondaryType);
-
             Button showDmgButton = FindViewById<Button>(Resource.Id.showDmgButton);
             TableLayout tableLayout1 = FindViewById<TableLayout>(Resource.Id.tableLayout1);
             
-            // filling textViewArray with textviews from table layout
+            // filling textViewArray with TextViews from TableLayout
             int y = 0;
             for (int i = 1; i < tableLayout1.ChildCount; i++)
             {
@@ -95,7 +96,7 @@ namespace PokemonTypeCalc
                 {
                     if (string.Equals(type2, Resources.GetString(Resource.String.notype)))
                     {
-                        // fill textviews of tablelayout with empty strings if both chosen types are (none)
+                        // fill TextViews of TableLayout with empty strings if both chosen types are (none)
                         for (int d = 0; d < textViewCount; d++)
                         {
                             textViewArray[d].Text = "";
@@ -160,7 +161,7 @@ namespace PokemonTypeCalc
             };
 
 		}
-        
+        // TO DO add sorting options 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
@@ -177,10 +178,11 @@ namespace PokemonTypeCalc
 
             return base.OnOptionsItemSelected(item);
         }
+
         protected override void OnSaveInstanceState(Bundle savedInstanceState)
         {
             base.OnSaveInstanceState(savedInstanceState);
-            // save strings from tablelayout
+            // save strings from TableLayout
             string[] temp = new string[36];
             int[] tempColors = new int[36];
             for (int d = 35; d >= 0; d--)

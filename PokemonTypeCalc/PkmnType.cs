@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
-namespace PokemonTypeCalc
+﻿namespace PokemonTypeCalc
 {
     public class PkmnType
     {
@@ -21,7 +9,11 @@ namespace PokemonTypeCalc
         }
         // property which stores type name
         public string TypeName { get; set; }
+
+        // property which stores values for damage multipliers
         public double DmgTaken { get; set; }
+
+        // property which stores pokemon type colour that is chosen based on type name
         public Android.Graphics.Color TypeColor
         {
             get
