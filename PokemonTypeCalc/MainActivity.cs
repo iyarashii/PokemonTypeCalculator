@@ -69,11 +69,7 @@ namespace PokemonTypeCalc
                 }
             }
 
-            //var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.pokemonType, Resource.Layout.spinner_item);
-           // adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-           // var adapter2 = ArrayAdapter.CreateFromResource(this, Resource.Array.pokemonType, Resource.Layout.spinner_item);
-            // adapter2.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-           // string[] pkmnTypeArray = Resources.GetStringArray(Resource.Array.pokemonType);
+            
             ColorfulSpinnerAdapter adapter = new ColorfulSpinnerAdapter(this, Resource.Array.pokemonType, Resource.Layout.spinner_item);
             ColorfulSpinnerAdapter adapter2 = new ColorfulSpinnerAdapter(this, Resource.Array.pokemonType, Resource.Layout.spinner_item);
             spinner.Adapter = adapter;
@@ -86,7 +82,7 @@ namespace PokemonTypeCalc
             string type2 = string.Empty;
             TypeCalculator dmgCalc = new TypeCalculator();
 
-            //string[] types = Resources.GetStringArray(Resource.Array.pokemonType); trzeba uzyc context jak sie chce korzystac z Resources w innych klasach niz activity
+            //
             PkmnType[] typez;
             PkmnType[] typez2;
             showDmgButton.Click += (sender, e) =>
