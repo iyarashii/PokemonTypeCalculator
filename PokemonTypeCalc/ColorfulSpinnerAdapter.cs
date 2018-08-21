@@ -6,9 +6,14 @@ namespace PokemonTypeCalc
 {
     class ColorfulSpinnerAdapter : BaseAdapter
     {
+        // field used for storing context
         private Context mContext;
+        // property used for storing resource layout id
         public int LayoutStyle { get; set; }
+        // property used for storing array id
         public string[] PkmnTypeArray { get; set; }
+
+        // constructor
         public ColorfulSpinnerAdapter(Context context, int textArrayResId, int textViewResId)
         {
             mContext = context;
@@ -22,14 +27,13 @@ namespace PokemonTypeCalc
 
         public override Java.Lang.Object GetItem(int position)
         {
-            // could wrap a Contact in a Java.Lang.Object
-            // to return it here if needed
             return PkmnTypeArray[position];
         }
         public override long GetItemId(int position)
         {
             return position;
         }
+        
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View v = convertView;
@@ -41,6 +45,7 @@ namespace PokemonTypeCalc
             }
             TextView tv = (TextView)v.FindViewById(Resource.Id.Kolor);
             tv.Text = PkmnTypeArray[position];
+            // setting different color for each item in the spinner
             switch (tv.Text)
             {
                 case "(none)":
@@ -102,12 +107,6 @@ namespace PokemonTypeCalc
                     break;
             }
             return v;
-        }
-        
-       /* public override View GetDropDownView(int position, View convertView, ViewGroup parent)
-        {
-
-        }*/
-   
+        }         
     }
 }

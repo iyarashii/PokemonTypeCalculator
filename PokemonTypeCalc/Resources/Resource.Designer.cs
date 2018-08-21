@@ -2418,9 +2418,6 @@ namespace PokemonTypeCalc
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
-			// aapt resource value: 0x7f0800dd
-			public const int action_settings = 2131230941;
-			
 			// aapt resource value: 0x7f0800c8
 			public const int action_text = 2131230920;
 			
@@ -2652,6 +2649,9 @@ namespace PokemonTypeCalc
 			// aapt resource value: 0x7f0800ce
 			public const int notification_main_column_container = 2131230926;
 			
+			// aapt resource value: 0x7f0800de
+			public const int optionsGroup = 2131230942;
+			
 			// aapt resource value: 0x7f08004c
 			public const int parallax = 2131230796;
 			
@@ -2882,6 +2882,18 @@ namespace PokemonTypeCalc
 			
 			// aapt resource value: 0x7f080043
 			public const int snap = 2131230787;
+			
+			// aapt resource value: 0x7f0800dd
+			public const int sortBy = 2131230941;
+			
+			// aapt resource value: 0x7f0800e0
+			public const int sortByMultiplier = 2131230944;
+			
+			// aapt resource value: 0x7f0800df
+			public const int sortByName = 2131230943;
+			
+			// aapt resource value: 0x7f0800e1
+			public const int sortByNothing = 2131230945;
 			
 			// aapt resource value: 0x7f080064
 			public const int spacer = 2131230820;
@@ -3386,9 +3398,6 @@ namespace PokemonTypeCalc
 			// aapt resource value: 0x7f090010
 			public const int abc_toolbar_collapse_description = 2131296272;
 			
-			// aapt resource value: 0x7f090028
-			public const int action_settings = 2131296296;
-			
 			// aapt resource value: 0x7f090027
 			public const int app_name = 2131296295;
 			
@@ -3401,8 +3410,8 @@ namespace PokemonTypeCalc
 			// aapt resource value: 0x7f090020
 			public const int character_counter_pattern = 2131296288;
 			
-			// aapt resource value: 0x7f090029
-			public const int notype = 2131296297;
+			// aapt resource value: 0x7f09002c
+			public const int notype = 2131296300;
 			
 			// aapt resource value: 0x7f090021
 			public const int password_toggle_content_description = 2131296289;
@@ -3421,6 +3430,18 @@ namespace PokemonTypeCalc
 			
 			// aapt resource value: 0x7f090011
 			public const int search_menu_title = 2131296273;
+			
+			// aapt resource value: 0x7f09002a
+			public const int sort_by_multiplier = 2131296298;
+			
+			// aapt resource value: 0x7f090029
+			public const int sort_by_name = 2131296297;
+			
+			// aapt resource value: 0x7f09002b
+			public const int sort_by_nothing = 2131296299;
+			
+			// aapt resource value: 0x7f090028
+			public const int sort_header = 2131296296;
 			
 			// aapt resource value: 0x7f090026
 			public const int status_bar_notification_info_overflow = 2131296294;

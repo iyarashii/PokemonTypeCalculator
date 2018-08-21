@@ -2,6 +2,7 @@
 {
     public class PkmnType
     {
+        // constructor
         public PkmnType(string name, double multiplier)
         {
             TypeName = name;

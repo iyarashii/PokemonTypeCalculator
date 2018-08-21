@@ -8,6 +8,7 @@ namespace PokemonTypeCalc
         readonly String[] types = Application.Context.Resources.GetStringArray(Resource.Array.pokemonType);
         PkmnType[] typez;
         
+        // method for sorting array by multiplier descending
         public PkmnType[] SortPkmnTypes(PkmnType[] pkmnArray)
         {
             Array.Sort(pkmnArray, delegate (PkmnType x, PkmnType y)
@@ -16,6 +17,16 @@ namespace PokemonTypeCalc
             });
             return pkmnArray;
         }
+        // method for sorting array by name alphabetically 
+        public PkmnType[] SortPkmnTypesByName(PkmnType[] pkmnArray)
+        {
+            Array.Sort(pkmnArray, delegate (PkmnType x, PkmnType y)
+            {
+                return x.TypeName.CompareTo(y.TypeName);
+            });
+            return pkmnArray;
+        }
+        // method used for setting multiplier values based on type given in the parameter string
         public PkmnType[] CheckType(string raw)
         {
             typez = new PkmnType[18];

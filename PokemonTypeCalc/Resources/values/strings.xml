@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Pokemon Type Calculator</string>
-    <string name="action_settings">Settings</string>
+    <string name="sort_header">Sort by:</string>
+    <string name="sort_by_name">Type Name</string>
+    <string name="sort_by_multiplier">Multiplier</string>
+    <string name="sort_by_nothing">Default type order</string>
     <string-array name="pokemonType">
       <item>(none)</item>
       <item>NORMAL</item>

@@ -1,8 +1,6 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using System.Globalization;
@@ -14,8 +12,11 @@ namespace PokemonTypeCalc
     public class MainActivity : AppCompatActivity
     {
         // Array of TextViews that are inside TableLayout
-        protected TextView[] textViewArray;        
-        
+        protected TextView[] textViewArray;
+        // private field used for storing id of selected radio button sorting method
+        private int selectedSorting = 0;
+        // private field used for comparing stored id to check which sorting mode is chosen
+        private IMenu menu;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);        
@@ -33,7 +34,9 @@ namespace PokemonTypeCalc
             Spinner spinner2 = FindViewById<Spinner>(Resource.Id.spinnerSecondaryType);
             Button showDmgButton = FindViewById<Button>(Resource.Id.showDmgButton);
             TableLayout tableLayout1 = FindViewById<TableLayout>(Resource.Id.tableLayout1);
-            
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
+
             // filling textViewArray with TextViews from TableLayout
             int y = 0;
             for (int i = 1; i < tableLayout1.ChildCount; i++)
@@ -50,18 +53,18 @@ namespace PokemonTypeCalc
                     }
                 }
             }
-            // restoring saved strings when screen orientation is changed
+            // restoring saved data when screen orientation is changed
             if (savedInstanceState != null)
             {
                 string[] temp = savedInstanceState.GetStringArray("savedArray");
                 int[] tempColors = savedInstanceState.GetIntArray("savedColors");
+                selectedSorting = savedInstanceState.GetInt("savedSorting");
                 
                 for (int d = 0; d < 36; d++)
                 {
                     textViewArray[d].Text = temp[d];
                     Android.Graphics.Color backgroundColor = new Android.Graphics.Color(tempColors[d]);
-                    textViewArray[d].SetBackgroundColor(backgroundColor);
-                    
+                    textViewArray[d].SetBackgroundColor(backgroundColor);                    
                 }
                 if (temp[0] != "")
                 {
@@ -69,23 +72,19 @@ namespace PokemonTypeCalc
                     tableLayout1.SetColumnCollapsed(1, false);
                 }
             }
-
-            
+            // creating 2 custom spinner adapters and assigning them to the primary and secondary pokemon type spinners
             ColorfulSpinnerAdapter adapter = new ColorfulSpinnerAdapter(this, Resource.Array.pokemonType, Resource.Layout.spinner_item);
             ColorfulSpinnerAdapter adapter2 = new ColorfulSpinnerAdapter(this, Resource.Array.pokemonType, Resource.Layout.spinner_item);
             spinner.Adapter = adapter;
             spinner2.Adapter = adapter2;
-
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-
+            
+            // creating local variables used for filling TextViews
             string type1 = string.Empty;
             string type2 = string.Empty;
-            TypeCalculator dmgCalc = new TypeCalculator();
-
-            //
+            TypeCalculator dmgCalc = new TypeCalculator();       
             PkmnType[] typez;
             PkmnType[] typez2;
+
             showDmgButton.Click += (sender, e) =>
             {
                 // checks spinner content
@@ -109,7 +108,15 @@ namespace PokemonTypeCalc
                     {
                         // if the secondary type is not (none) check type and start filling table with sorted values
                         typez = dmgCalc.CheckType(type2);
-                        typez = dmgCalc.SortPkmnTypes(typez);
+                        // check selected sorting option
+                        if(selectedSorting == menu.GetItem(2).ItemId)
+                        {
+                            typez = dmgCalc.SortPkmnTypes(typez);
+                        }
+                        else if(selectedSorting == menu.GetItem(1).ItemId)
+                        {
+                            typez = dmgCalc.SortPkmnTypesByName(typez);
+                        }
                         for(int d = 0, t = 0; d < textViewCount - 1; d += 2, t++)
                         {
                             textViewArray[d].Text = typez[t].TypeName;
@@ -117,6 +124,7 @@ namespace PokemonTypeCalc
                             textViewArray[d + 1].SetBackgroundColor(typez[t].TypeColor);
                             textViewArray[d + 1].Text = typez[t].DmgTaken.ToString() + "x";
                         }
+                        // show table
                         tableLayout1.SetColumnCollapsed(0, false);
                         tableLayout1.SetColumnCollapsed(1, false);
                     }
@@ -127,7 +135,15 @@ namespace PokemonTypeCalc
                     if (string.Equals(type2, Resources.GetString(Resource.String.notype)) || string.Equals(type2, type1))
                     {
                         typez = dmgCalc.CheckType(type1);
-                        typez = dmgCalc.SortPkmnTypes(typez);
+                        // check selected sorting option
+                        if (selectedSorting == menu.GetItem(2).ItemId)
+                        {
+                            typez = dmgCalc.SortPkmnTypes(typez);
+                        }
+                        else if (selectedSorting == menu.GetItem(1).ItemId)
+                        {
+                            typez = dmgCalc.SortPkmnTypesByName(typez);
+                        }
                         for (int d = 0, t = 0; d < textViewCount - 1; d += 2, t++)
                         {
                             textViewArray[d].Text = typez[t].TypeName;
@@ -146,7 +162,15 @@ namespace PokemonTypeCalc
                         {
                             typez[i].DmgTaken *= typez2[i].DmgTaken;
                         }
-                        typez = dmgCalc.SortPkmnTypes(typez);
+                        // check selected sorting option
+                        if (selectedSorting == menu.GetItem(2).ItemId)
+                        {
+                            typez = dmgCalc.SortPkmnTypes(typez);
+                        }
+                        else if (selectedSorting == menu.GetItem(1).ItemId)
+                        {
+                            typez = dmgCalc.SortPkmnTypesByName(typez);
+                        }
                         for (int d = 0, t = 0; d < textViewCount - 1; d += 2, t++)
                         {
                             textViewArray[d].Text = typez[t].TypeName;
@@ -161,28 +185,44 @@ namespace PokemonTypeCalc
             };
 
 		}
-        // TO DO add sorting options 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            this.menu = menu;
+            // check if some sorting method was chosen before rotating screen if not set sorting method to default(by Multiplier)
+            switch (selectedSorting)
+            {
+                case 0:
+                    menu.GetItem(2).SetChecked(true);
+                    selectedSorting = menu.GetItem(2).ItemId;
+                    break;
+                default:
+                    menu.FindItem(selectedSorting).SetChecked(true);
+                    break;
+            }
             return true;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             int id = item.ItemId;
-            if (id == Resource.Id.action_settings)
+            // check and store selected sorting method button id, if id matches header id do nothing
+            switch (id)
             {
-                return true;
+                case Resource.Id.sortBy:
+                    return true;
+                default:
+                    item.SetChecked(true);
+                    selectedSorting = item.ItemId;
+                    break;               
             }
-
             return base.OnOptionsItemSelected(item);
         }
 
         protected override void OnSaveInstanceState(Bundle savedInstanceState)
         {
             base.OnSaveInstanceState(savedInstanceState);
-            // save strings from TableLayout
+            // save data from TableLayout
             string[] temp = new string[36];
             int[] tempColors = new int[36];
             for (int d = 35; d >= 0; d--)
@@ -196,8 +236,11 @@ namespace PokemonTypeCalc
                  }
                 
             }
+            // save selected sorting method button id
+            int radioId = selectedSorting; 
             savedInstanceState.PutStringArray("savedArray", temp);
-            savedInstanceState.PutIntArray("savedColors", tempColors);              
+            savedInstanceState.PutIntArray("savedColors", tempColors);     
+            savedInstanceState.PutInt("savedSorting", radioId);            
         }
     }
 }
