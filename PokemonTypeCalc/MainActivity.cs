@@ -219,28 +219,28 @@ namespace PokemonTypeCalc
             return base.OnOptionsItemSelected(item);
         }
 
-        protected override void OnSaveInstanceState(Bundle savedInstanceState)
+        protected override void OnSaveInstanceState(Bundle outState)
         {
-            base.OnSaveInstanceState(savedInstanceState);
+            base.OnSaveInstanceState(outState);
             // save data from TableLayout
             string[] temp = new string[36];
             int[] tempColors = new int[36];
             for (int d = 35; d >= 0; d--)
             {
                 temp[d] = textViewArray[d].Text;
-                if (textViewArray[d].Background is Android.Graphics.Drawables.ColorDrawable)
-                 {
-                 Android.Graphics.Drawables.ColorDrawable cd = (Android.Graphics.Drawables.ColorDrawable)textViewArray[d].Background;
-                 int colorCode = cd.Color.ToArgb();
+                Android.Graphics.Drawables.ColorDrawable backgroundColor = textViewArray[d].Background as Android.Graphics.Drawables.ColorDrawable;                
+                if (backgroundColor != null)
+                {                 
+                 int colorCode = backgroundColor.Color.ToArgb();
                  tempColors[d] = colorCode;
                  }
                 
             }
             // save selected sorting method button id
             int radioId = selectedSorting; 
-            savedInstanceState.PutStringArray("savedArray", temp);
-            savedInstanceState.PutIntArray("savedColors", tempColors);     
-            savedInstanceState.PutInt("savedSorting", radioId);            
+            outState.PutStringArray("savedArray", temp);
+            outState.PutIntArray("savedColors", tempColors);     
+            outState.PutInt("savedSorting", radioId);            
         }
     }
 }

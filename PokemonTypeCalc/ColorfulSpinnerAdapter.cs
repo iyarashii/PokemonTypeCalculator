@@ -7,7 +7,7 @@ namespace PokemonTypeCalc
     class ColorfulSpinnerAdapter : BaseAdapter
     {
         // field used for storing context
-        private Context mContext;
+        private readonly Context mContext;
         // property used for storing resource layout id
         public int LayoutStyle { get; set; }
         // property used for storing array id

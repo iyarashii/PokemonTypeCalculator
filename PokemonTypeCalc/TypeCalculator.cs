@@ -6,7 +6,6 @@ namespace PokemonTypeCalc
     public class TypeCalculator
     {
         readonly String[] types = Application.Context.Resources.GetStringArray(Resource.Array.pokemonType);
-        PkmnType[] typez;
         
         // method for sorting array by multiplier descending
         public PkmnType[] SortPkmnTypes(PkmnType[] pkmnArray)
@@ -29,7 +28,7 @@ namespace PokemonTypeCalc
         // method used for setting multiplier values based on type given in the parameter string
         public PkmnType[] CheckType(string raw)
         {
-            typez = new PkmnType[18];
+            PkmnType[] typez = new PkmnType[18];
             // NORMAL
             if (string.Equals(raw, types[1]))
             {
