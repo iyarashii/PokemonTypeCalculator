@@ -1,4 +1,5 @@
 # Pokemon Type Calculator
+![Working app image](https://i.imgur.com/jLh5rtt.png?1)  
 Simple Android application written in C# with Xamarin.Android. It shows damage multipliers that affect defending pokemon.
 This app shows damage multipliers that affect defending pokemon.  
 After selecting types and hitting the `SHOW DAMAGE TAKEN` button it displays every possible attacking pokemon type and
