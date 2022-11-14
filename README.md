@@ -6,6 +6,13 @@ a multiplier of its damage. The list of multipliers and types is sorted by the d
 There are 3 ways of sorting available:
 by the `Type` alphabetically (from A to Z), by the `Damage multiplier` value (descending) and by the default type order from the games.
 
+Other versions:
+- WinForms - https://github.com/iyarashii/PkmnCalcWinForms
+- WPF - https://github.com/iyarashii/PkmnCalcWPF
+- WPF with Avalonia - https://github.com/iyarashii/PkmnTypeCalcAvaloniaWpf
+- ASP.NET with Razor Pages - https://github.com/iyarashii/PkmnTypeCalcRazorPages
+- Blazor WASM - https://github.com/iyarashii/PkmnCalcBlazorWasm
+
 # Screenshots
 1. Initial app window:  
 ![Initial app window image](https://i.imgur.com/DCQ34QS.png?1)
